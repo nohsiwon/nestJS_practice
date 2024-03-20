@@ -24,10 +24,13 @@ services:
       - ./proxy/nginx-local.conf:/etc/nginx/nginx.conf
   postgres:
     image: postgres:latest
-    env_file:
-      - .env
+    environment:
+      TZ: Asia/Seoul
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: love1221!@
+      POSTGRES_DB: devcamp-project
     ports:
-      - '5432:5432'
+      - '5555:5432'
     volumes:
       - $PWD/volumes/postgres_data:/var/lib/postgresql/data
 networks:
