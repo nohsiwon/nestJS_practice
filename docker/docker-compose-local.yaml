@@ -2,37 +2,34 @@ version: '3'
 
 services:
   server:
-    container_name: devcamp-container
-    image: devcamp:latest
+    container_name: devcamp-project-server-local
+    image: devcamp-project-server-local:latest
     restart: always
     depends_on:
       - postgres
     networks:
-      - devcamp-example-backend
+      - devcamp-project
     environment:
       - ENV=local
       - TZ=Asia/Seoul
   proxy:
-    container_name: devcamp-example-backend-nginx-local
-    image: devcamp-example-backend-nginx-local:latest
+    container_name: devcamp-project-nginx-local
+    image: devcamp-project-nginx-local:latest
     restart: always
     networks:
-      - devcamp-example-backend
+      - devcamp-project
     ports:
       - 4000:80
     volumes:
       - ./proxy/nginx-local.conf:/etc/nginx/nginx.conf
   postgres:
     image: postgres:latest
-    environment:
-      TZ: Asia/Seoul
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: devcamp
+    env_file:
+      - .env
     ports:
       - '5432:5432'
     volumes:
       - $PWD/volumes/postgres_data:/var/lib/postgresql/data
 networks:
-  devcamp-example-backend:
+  devcamp-project:
     external: true

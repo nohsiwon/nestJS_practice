@@ -1,13 +1,20 @@
 #!make
 TAG                         := $$(git log -1 --pretty=format:%h)
-PROJECT_NAME                := devcamp
-NAME_SERVER                 := ${PROJECT_NAME}-$$env
+PROJECT_NAME                := devcamp-project
+BASENAME_SEVER              := ${PROJECT_NAME}-server
+BASENAME_PROXY              := ${PROJECT_NAME}-nginx
+NAME_SERVER                 := ${BASENAME_SEVER}-$$env
+NAME_PROXY                  := ${BASENAME_PROXY}-$$env
 IMG_COMMIT_SERVER     		:= ${NAME_SERVER}:${TAG}
 IMG_LATEST_SERVER     		:= ${NAME_SERVER}:latest
+IMG_COMMIT_PROXY      		:= ${NAME_PROXY}:${TAG}
+IMG_LATEST_PROXY      		:= ${NAME_PROXY}:latest
 
 build:
-	@docker build -f Dockerfile --build-arg ENV=$$env -t ${IMG_COMMIT_SERVER} ../;
+	@docker build -f _proxy.Dockerfile --build-arg ENV=$$env -t ${IMG_COMMIT_PROXY} .;
+	@docker build -f _server.Dockerfile --build-arg ENV=$$env -t ${IMG_COMMIT_SERVER} ../;
 	@docker tag ${IMG_COMMIT_SERVER} ${IMG_LATEST_SERVER};
+	@docker tag ${IMG_COMMIT_PROXY} ${IMG_LATEST_PROXY};
 
 run:
 	@echo $$env;

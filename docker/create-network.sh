@@ -1,1 +1,1 @@
-docker network create devcamp
+docker network create devcamp-project
