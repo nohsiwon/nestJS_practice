@@ -30,7 +30,7 @@ services:
       POSTGRES_PASSWORD: love1221!@
       POSTGRES_DB: devcamp-project
     ports:
-      - '5555:5432'
+      - '5432:5432'
     volumes:
       - $PWD/volumes/postgres_data:/var/lib/postgresql/data
 networks:

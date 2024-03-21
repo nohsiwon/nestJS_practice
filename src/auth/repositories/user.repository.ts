@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository, InjectEntityManager } from '@nestjs/typeorm';
 import { Repository, EntityManager } from 'typeorm';
 import { User } from '../entities';
-import { CreateUserDto } from '../dto';
+import { SignUpReqDto } from '../dto';
 
 @Injectable()
 export class UserRepository extends Repository<User> {
@@ -19,8 +19,8 @@ export class UserRepository extends Repository<User> {
     return this.repo.findOneBy({ email });
   }
 
-  async createUser(createUserDto: CreateUserDto, hashedPassword: string) {
-    const { name, email, phone, role } = createUserDto;
+  async createUser(SignUpReqDto: SignUpReqDto, hashedPassword: string) {
+    const { name, email, phone, role } = SignUpReqDto;
 
     const user = new User();
 
