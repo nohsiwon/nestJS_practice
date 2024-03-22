@@ -8,15 +8,15 @@ import { SignUpReqDto } from '../dto';
 export class UserRepository extends Repository<User> {
   constructor(
     @InjectRepository(User)
-    private readonly repo: Repository<User>,
+    private readonly repository: Repository<User>,
     @InjectEntityManager()
     private readonly entityManager: EntityManager,
   ) {
-    super(repo.target, repo.manager, repo.queryRunner);
+    super(repository.target, repository.manager, repository.queryRunner);
   }
 
   async findOneByEmail(email: string) {
-    return this.repo.findOneBy({ email });
+    return this.repository.findOneBy({ email });
   }
 
   async createUser(SignUpReqDto: SignUpReqDto, hashedPassword: string) {
@@ -29,6 +29,6 @@ export class UserRepository extends Repository<User> {
     user.password = hashedPassword;
     user.phone = phone;
     user.role = role;
-    return this.repo.save(user);
+    return this.repository.save(user);
   }
 }
