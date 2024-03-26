@@ -1,73 +1,76 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Devcamp-project
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## 초기 폴더 구조 구상
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+📦payment</br>
+ ┣ 📂controllers</br>
+ ┃ ┣ 📜index.ts</br>
+ ┃ ┗ 📜payment.controller.ts</br>
+ ┣ 📂dto</br>
+ ┃ ┗ 📜create-order.dto.ts</br>
+ ┃ ┣ 📜index.ts</br>
+ ┣ 📂entities</br>
+ ┃ ┣ 📜coupon.entity.ts</br>
+ ┃ ┣ 📜index.ts</br>
+ ┃ ┣ 📜issued-coupon.entity.ts</br>
+ ┃ ┣ 📜order-item.entity.ts</br>
+ ┃ ┣ 📜order.entity.ts</br>
+ ┃ ┣ 📜point-log.entity.ts</br>
+ ┃ ┣ 📜point.entity.ts</br>
+ ┃ ┣ 📜product.entity.ts</br>
+ ┃ ┗ 📜shipping-info.entity.ts</br>
+ ┣ 📂repositories</br>
+ ┃ ┣ 📜coupon.repository.ts</br>
+ ┃ ┣ 📜index.ts</br>
+ ┃ ┣ 📜issued-coupon.repository.ts</br>
+ ┃ ┣ 📜order-item.repository.ts</br>
+ ┃ ┣ 📜order.repository.ts</br>
+ ┃ ┣ 📜point-log.repository.ts</br>
+ ┃ ┣ 📜point.repository.ts</br>
+ ┃ ┣ 📜product.repository.ts</br>
+ ┃ ┗ 📜shipping-info.repository.ts</br>
+ ┣ 📂services</br>
+ ┃ ┣ 📜index.ts</br>
+ ┃ ┣ 📜payment.service.ts</br>
+ ┃ ┗ 📜product.service.ts</br>
+ ┗ 📜payment.module.ts</br>
 
-## Description
+> 예시 코드를 참조하여 구성
+</br>
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 초기 코드 흐름 구상
 
-## Installation
-
-```bash
-$ npm install
-```
-
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- **주문 페이지** (바로 구매)
+  - **주문 페이지 API** -> 주문 갯수에 맞춰 총 가격 반환
+  </br>
+  
+  - **쿠폰 적용 API** -> 총 가격의 쿠폰 적용 가격 반환, 이미 포인트 사용했을 시 (총가격 - 포인트) * (쿠폰% / 100) or -쿠폰
+    - 정액제 쿠폰이 총 가격을 초과할 시 사용 가능하지만 초과 할인 불가
+      ex) 1000원 상품 -> 3000원 쿠폰 = 1000원 할인 -> 가격 0원
+      </br>
+      
+  - **포인트 적용 API** -> 총 가격의 포인트 적용 가격 반환, 이미 쿠폰 사용했을 시 (총가격  * (쿠폰% / 100)) - 포인트 or 총가격 - 쿠폰 - 포인트
+    - 포인트가 총 가격을 초과할 시 총 가격까지 사용 가능하도록 제한
+    </br>
+    
+  - **구매하기 API** -> 총가격에 적용한 쿠폰, 포인트를 트렌젝션으로 묶어 처리 -> 포인트 사용한 만큼 절감, 사용한 쿠폰 제거, 결제
+    - **구매 완료** 시 order 테이블에 주문내역 추가
+ </br>
+ </br>
+ 
+- **장바구니 페이지** (담기 후 구매)
+  - **장바구니 페이지 API** -> 주문 총 가격 반환
+   </br>
+   
+  - **쿠폰 적용 API** -> 정액제 쿠폰 사용 시 "바로 구매" 페이지와 동일. 정률제 쿠폰 사용 시 쿠폰 적용할 상품 선택
+    - 정률제 쿠폰 적용 상품 할인가 + 나머지 총 가격 합 = 최종 결제 금액
+    - 포인트, 정액제 쿠폰 사용 시에는 총 가격에서 절감
+   </br>
+   
+  - **포인트 적용 API** -> 포인트 사용 시 총 가격에서 절감
+    - 포인트가 총 가격을 초과할 시 총 가격까지 사용 가능하도록 제한
+   </br>
+   
+  - **구매 하기 API** -> 정률제 쿠폰 사용 상품 할인 후 총 가격에서 포인트, 정액제 쿠폰 절감. 트렌젝션으로 묶어 처리 -> 포인트 사용한 만큼절감, 사용한 쿠폰 제거, 결제
+    - **구매 완료** 시 order 테이블에 주문내역 추가
+    </br>
