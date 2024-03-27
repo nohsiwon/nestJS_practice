@@ -5,8 +5,7 @@ import { AuthModule } from './auth/auth.module';
 import { validationSchema } from './config/validation.schema';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { addTransactionalDataSource } from 'typeorm-transactional';
-import { DataSource } from 'typeorm';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
@@ -28,14 +27,9 @@ import { DataSource } from 'typeorm';
         synchronize: configService.get<string>('RUNTIME') !== 'prod',
         logging: configService.get<string>('RUNTIME') !== 'prod',
       }),
-      // async dataSourceFactory(options) {
-      //   if (!options) {
-      //     throw new Error('Invalid options passed');
-      //   }
-      //   return addTransactionalDataSource(new DataSource(options));
-      // },
     }),
     AuthModule,
+    PaymentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

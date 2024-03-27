@@ -1,5 +1,8 @@
 import { BaseEntity } from 'src/common/entity';
-import { Column, Entity } from 'typeorm';
+import { Order, Point } from 'src/payment/entities';
+import { Column, Entity, OneToMany, OneToOne, Relation } from 'typeorm';
+import { RefreshToken } from './refreshToken.entity';
+import { AccessToken } from './accessToken.entity';
 
 export type UserRole = 'admin' | 'user';
 
@@ -19,4 +22,16 @@ export class User extends BaseEntity {
 
   @Column({ type: 'varchar', length: 50 })
   role: UserRole;
+
+  @OneToMany(() => AccessToken, (token) => token.user)
+  accessToken: Relation<AccessToken[]>;
+
+  @OneToMany(() => RefreshToken, (token) => token.user)
+  refreshToken: Relation<RefreshToken[]>;
+
+  @OneToMany(() => Order, (orders) => orders.user)
+  orders: Order;
+
+  @OneToOne(() => Point, (point) => point.user)
+  point: Point;
 }
